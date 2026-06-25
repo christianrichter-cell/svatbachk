@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Káťa & Chris — Bereme se</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Pinyon+Script&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+:root {
+  --bg: #E7E0CE;
+  --paper: #F0EADA;
+  --ink: #25301F;
+  --ink-soft: #586049;
+  --accent: #9E5A3C;
+  --accent-soft: #C28B6E;
+  --rule: rgba(37,48,31,0.22);
+  --rule-soft: rgba(37,48,31,0.12);
+  --shadow: rgba(37,48,31,0.12);
+  --serif: "Cormorant Garamond", serif;
+  --script: "Pinyon Script", cursive;
+  --sans: "DM Sans", sans-serif;
+  --mono: "DM Mono", monospace;
+}
+[data-theme="dark"] {
+  --bg: #151B13;
+  --paper: #1E271B;
+  --ink: #ECE3CF;
+  --ink-soft: #A6AE94;
+  --accent: #CF9067;
+  --accent-soft: #8A6B52;
+  --rule: rgba(236,227,207,0.26);
+  --rule-soft: rgba(236,227,207,0.12);
+  --shadow: rgba(0,0,0,0.5);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background 400ms ease, color 400ms ease;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+input, select, textarea { font: inherit; color: inherit; }
+
+/* ============ LAYOUT ============ */
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+.wrap-narrow { max-width: 820px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 640px) {
+  .wrap, .wrap-narrow { padding: 0 22px; }
+}
+
+/* ============ TYPE ============ */
+.serif { font-family: var(--serif); font-weight: 400; }
+.script { font-family: var(--script); font-weight: 400; }
+.mono { font-family: var(--mono); }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+.display {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.005em; }
+
+/* ============ NAV (sticky minimal) ============ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+  padding: 18px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(to bottom, var(--bg) 40%, transparent);
+  pointer-events: none;
+  transition: opacity 400ms;
+}
+.nav > * { pointer-events: auto; }
+.nav-mark { font-family: var(--serif); font-style: italic; font-size: 22px; }
+.nav-mark .amp { font-family: var(--script); font-size: 28px; vertical-align: -2px; padding: 0 2px; color: var(--accent); }
+.nav-meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
+@media (max-width: 640px) { .nav-meta { display: none; } }
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  padding: 120px 32px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+  overflow: hidden;
+}
+.hero-grid {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+.hero-tag {
+  display: flex; align-items: center; gap: 14px;
+}
+.hero-tag .line { flex: 1; height: 1px; background: var(--rule); max-width: 80px; }
+.hero-title {
+  font-size: clamp(56px, 12vw, 168px);
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+}
+.hero-title .row { display: block; }
+.hero-title .row.r2 { padding-left: 12%; }
+.hero-title .script-amp {
+  font-family: var(--script);
+  font-style: normal;
+  color: var(--accent);
+  font-size: 0.95em;
+  vertical-align: -0.06em;
+  padding: 0 0.12em;
+  font-weight: 400;
+}
+.hero-meta {
+  margin-top: 38px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  border-top: 1px solid var(--rule);
+  padding-top: 22px;
+  max-width: 760px;
+}
+.hero-meta-item .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+.hero-meta-item .v { font-family: var(--serif); font-size: 20px; font-style: italic; font-weight: 400; }
+@media (max-width: 720px) {
+  .hero-meta { grid-template-columns: 1fr; gap: 14px; }
+  .hero-title .row.r2 { padding-left: 0; }
+}
+
+/* Topographic motif */
+.topo {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.topo-1 { top: -30px; right: -70px; width: 700px; height: 700px; }
+.topo-2 { bottom: -200px; left: -180px; width: 560px; height: 560px; opacity: 0.4; }
+[data-theme="dark"] .topo { opacity: 0.35; }
+[data-theme="dark"] .topo-2 { opacity: 0.22; }
+
+.crater-mark {
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  border-left: 1px solid var(--rule);
+  padding: 18px 0 18px 6px;
+}
+@media (max-width: 900px) { .crater-mark { display: none; } }
+
+.scroll-cue {
+  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--ink-soft);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+.scroll-cue::after {
+  content: ""; display: block; width: 1px; height: 36px; background: var(--rule);
+  animation: cue 2.4s infinite ease-in-out;
+}
+@keyframes cue { 0%,100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; } 50% { opacity: 1; transform: scaleY(1); } }
+
+/* ============ SECTION ============ */
+section { padding: 110px 0; position: relative; }
+@media (max-width: 640px) { section { padding: 80px 0; } }
+.section-head {
+  display: grid; grid-template-columns: 200px 1fr; gap: 40px; align-items: baseline;
+  margin-bottom: 56px;
+}
+.section-head .num {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.section-head .num::before { content: ""; display: inline-block; width: 28px; height: 1px; background: var(--rule); vertical-align: middle; margin-right: 12px; transform: translateY(-2px); }
+.section-head h2 {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: clamp(38px, 6vw, 72px);
+  line-height: 1.0; letter-spacing: -0.015em;
+}
+@media (max-width: 720px) {
+  .section-head { grid-template-columns: 1fr; gap: 12px; margin-bottom: 36px; }
+}
+
+/* ============ STORY ============ */
+.story-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: start;
+}
+.story-grid .body p { margin-bottom: 1.2em; font-size: 17px; line-height: 1.7; color: var(--ink); max-width: 56ch; }
+.story-grid .body .dropcap::first-letter {
+  font-family: var(--serif); font-style: italic; font-size: 86px; line-height: 0.86; float: left;
+  padding: 8px 14px 0 0; color: var(--accent); font-weight: 300;
+}
+.story-pull {
+  border-left: 1px solid var(--rule);
+  padding: 8px 0 8px 28px;
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 24px; line-height: 1.35;
+  color: var(--ink);
+}
+.story-pull .sig { display: block; margin-top: 18px; font-family: var(--mono); font-style: normal; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
+.travel-map { margin-top: 36px; }
+.travel-map .caption { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 12px; }
+@media (max-width: 800px) { .story-grid { grid-template-columns: 1fr; gap: 36px; } }
+
+/* ============ COUNTDOWN ============ */
+.countdown { text-align: center; padding: 60px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.countdown .lead { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 26px; margin-bottom: 36px; }
+.countdown-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  max-width: 780px; margin: 0 auto;
+}
+.cd-unit { display: flex; flex-direction: column; align-items: center; }
+.cd-unit .n {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: clamp(54px, 9vw, 112px); line-height: 1; letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.cd-unit .l {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--ink-soft); margin-top: 12px;
+}
+@media (max-width: 640px) {
+  .countdown-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+}
+
+/* ============ PROGRAM TIMELINE ============ */
+.timeline {
+  display: grid; grid-template-columns: 1fr; gap: 0;
+  border-top: 1px solid var(--rule);
+}
+.tl-row {
+  display: grid; grid-template-columns: 140px 1fr 1fr;
+  gap: 32px;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  align-items: baseline;
+}
+.tl-row:last-child { border-bottom: 1px solid var(--rule); }
+.tl-row .time {
+  font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--accent);
+}
+.tl-row .title { font-family: var(--serif); font-size: 22px; font-style: italic; }
+.tl-row .desc { font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+.tl-row.is-ceremony { background: linear-gradient(to right, transparent, var(--paper), transparent); margin: 0 -32px; padding: 30px 32px; }
+.tl-row.is-ceremony .time { color: var(--ink); font-style: normal; font-weight: 500; }
+.tl-row.is-ceremony .title::before { content: "★ "; color: var(--accent); font-style: normal; }
+@media (max-width: 720px) {
+  .tl-row { grid-template-columns: 1fr; gap: 6px; padding: 22px 0; }
+  .tl-row .desc { font-size: 14px; }
+}
+
+/* ============ PLACE / MAP ============ */
+.place-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: stretch; }
+.place-card { background: var(--paper); padding: 36px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--rule-soft); }
+.place-card .label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 12px; }
+.place-card h3 { font-family: var(--serif); font-style: italic; font-size: 30px; line-height: 1.15; margin-bottom: 12px; }
+.place-card p { font-size: 15px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 18px; }
+.place-card .link { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; padding-bottom: 4px; border-bottom: 1px solid var(--accent); align-self: flex-start; color: var(--accent); }
+.map-frame { aspect-ratio: 4/3; background: var(--paper); border: 1px solid var(--rule-soft); position: relative; overflow: hidden; }
+@media (max-width: 800px) { .place-grid { grid-template-columns: 1fr; } }
+
+/* ============ DRESS CODE ============ */
+.dress-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.dress-grid .lead p { font-size: 17px; line-height: 1.7; color: var(--ink); margin-bottom: 1em; max-width: 50ch; }
+.dress-grid .lead p.lede { font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--ink); line-height: 1.35; margin-bottom: 24px; }
+.palette { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.swatch { display: flex; flex-direction: column; gap: 10px; }
+.swatch .chip { aspect-ratio: 3/4; border: 1px solid var(--rule-soft); }
+.swatch .name { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); }
+@media (max-width: 720px) { .dress-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+/* ============ GIFTS ============ */
+.gift {
+  background: var(--paper);
+  padding: 60px 50px;
+  border: 1px solid var(--rule-soft);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;
+}
+.gift .quote { font-family: var(--serif); font-style: italic; font-size: 28px; line-height: 1.35; color: var(--ink); }
+.gift .quote .stamp { display: block; margin-top: 22px; font-family: var(--script); font-size: 36px; color: var(--accent); font-style: normal; line-height: 1; }
+.gift .detail { border-left: 1px solid var(--rule); padding-left: 36px; }
+.gift .detail dl { display: grid; grid-template-columns: auto 1fr; gap: 14px 24px; }
+.gift .detail dt { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); padding-top: 4px; }
+.gift .detail dd { font-family: var(--serif); font-style: italic; font-size: 19px; }
+@media (max-width: 800px) {
+  .gift { grid-template-columns: 1fr; padding: 40px 28px; gap: 30px; }
+  .gift .detail { border-left: none; border-top: 1px solid var(--rule); padding: 28px 0 0; }
+}
+
+/* ============ RSVP ============ */
+.rsvp { background: var(--ink); color: var(--paper); margin: 0 -32px; padding: 110px 32px; }
+[data-theme="dark"] .rsvp { background: var(--paper); color: var(--ink); }
+.rsvp .section-head .num { color: rgba(246,241,230,0.55); }
+.rsvp .section-head .num::before { background: rgba(246,241,230,0.3); }
+.rsvp .section-head h2 { color: var(--paper); }
+[data-theme="dark"] .rsvp .section-head .num { color: var(--ink-soft); }
+[data-theme="dark"] .rsvp .section-head .num::before { background: var(--rule); }
+[data-theme="dark"] .rsvp .section-head h2 { color: var(--ink); }
+.rsvp-form {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px 22px;
+  max-width: 820px;
+}
+.rsvp .lead { max-width: 56ch; margin-bottom: 44px; font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.45; color: var(--paper); }
+[data-theme="dark"] .rsvp .lead { color: var(--ink); }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field.full { grid-column: 1 / -1; }
+.field label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(246,241,230,0.65); }
+[data-theme="dark"] .field label { color: var(--ink-soft); }
+.field input, .field select, .field textarea {
+  background: transparent;
+  color: var(--paper);
+  border: none; border-bottom: 1px solid rgba(246,241,230,0.35);
+  padding: 10px 0;
+  font-family: var(--serif); font-style: italic; font-size: 18px;
+  border-radius: 0;
+  width: 100%;
+  outline: none;
+  transition: border-color 200ms;
+}
+[data-theme="dark"] .field input, [data-theme="dark"] .field select, [data-theme="dark"] .field textarea { color: var(--ink); border-color: var(--rule); }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent-soft); }
+.field textarea { resize: vertical; min-height: 80px; }
+.field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath fill='%23F0EADA' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0 center; background-size: 12px; padding-right: 22px; }
+[data-theme="dark"] .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath fill='%23ECE3CF' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); }
+.field select option { background: var(--ink); color: var(--paper); }
+[data-theme="dark"] .field select option { background: var(--paper); color: var(--ink); }
+.attendance { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.attendance label {
+  cursor: pointer;
+  border: 1px solid rgba(246,241,230,0.35);
+  padding: 18px 22px;
+  display: flex; align-items: center; gap: 14px;
+  transition: all 200ms;
+  font-family: var(--serif); font-style: italic; font-size: 18px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--paper);
+}
+[data-theme="dark"] .attendance label { border-color: var(--rule); color: var(--ink); }
+.attendance input { display: none; }
+.attendance input:checked + .att-mark {
+  background: var(--paper); color: var(--ink); border-color: var(--paper);
+}
+[data-theme="dark"] .attendance input:checked + .att-mark { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.attendance label:has(input:checked) { border-color: var(--paper); }
+[data-theme="dark"] .attendance label:has(input:checked) { border-color: var(--ink); }
+.att-mark {
+  display: inline-block; width: 24px; height: 24px; border: 1px solid rgba(246,241,230,0.5);
+  border-radius: 50%;
+  transition: all 200ms;
+}
+[data-theme="dark"] .att-mark { border-color: var(--rule); }
+.meal-options { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 4px; }
+.meal-card {
+  border: 1px solid rgba(246,241,230,0.35);
+  padding: 18px;
+  cursor: pointer;
+  transition: all 200ms;
+  display: flex; flex-direction: column; gap: 6px;
+}
+[data-theme="dark"] .meal-card { border-color: var(--rule); }
+.meal-card input { display: none; }
+.meal-card .letter { font-family: var(--serif); font-style: italic; font-size: 32px; line-height: 1; color: var(--accent-soft); }
+.meal-card .name { font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.2; }
+.meal-card .note { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(246,241,230,0.55); }
+[data-theme="dark"] .meal-card .note { color: var(--ink-soft); }
+.meal-card:has(input:checked) { background: rgba(246,241,230,0.06); border-color: var(--paper); }
+[data-theme="dark"] .meal-card:has(input:checked) { background: rgba(26,41,66,0.06); border-color: var(--ink); }
+@media (max-width: 720px) {
+  .rsvp-form { grid-template-columns: 1fr; }
+  .attendance, .meal-options { grid-template-columns: 1fr; }
+}
+.submit-row { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 22px; flex-wrap: wrap; margin-top: 18px; }
+.btn-submit {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+  padding: 16px 32px;
+  border: 1px solid var(--paper);
+  color: var(--paper);
+  transition: all 200ms;
+  background: transparent;
+}
+[data-theme="dark"] .btn-submit { border-color: var(--ink); color: var(--ink); }
+.btn-submit:hover { background: var(--paper); color: var(--ink); }
+[data-theme="dark"] .btn-submit:hover { background: var(--ink); color: var(--paper); }
+.rsvp-deadline { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(246,241,230,0.55); }
+[data-theme="dark"] .rsvp-deadline { color: var(--ink-soft); }
+.rsvp-thanks {
+  display: none;
+  padding: 40px 0;
+  font-family: var(--serif); font-style: italic; font-size: 24px;
+  color: var(--paper);
+  border-top: 1px solid rgba(246,241,230,0.3);
+}
+[data-theme="dark"] .rsvp-thanks { color: var(--ink); }
+.rsvp-thanks.is-on { display: block; }
+
+/* ============ CONTACT ============ */
+.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.contact-card { border-top: 1px solid var(--rule); padding-top: 22px; }
+.contact-card .role { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px; }
+.contact-card .name { font-family: var(--serif); font-style: italic; font-size: 26px; margin-bottom: 6px; }
+.contact-card .phone { font-family: var(--serif); font-size: 17px; color: var(--ink-soft); }
+@media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+/* ============ GALLERY ============ */
+.gallery-intro { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; margin-bottom: 50px; align-items: end; }
+.gallery-intro p { font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.45; max-width: 44ch; }
+.gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 80px; gap: 14px; }
+.gallery-grid image-slot {
+  width: 100%; height: 100%; display: block;
+  background: var(--paper);
+  border: 1px solid var(--rule-soft);
+}
+.g1 { grid-column: 1 / span 5; grid-row: span 5; }
+.g2 { grid-column: 6 / span 4; grid-row: span 3; }
+.g3 { grid-column: 10 / span 3; grid-row: span 4; }
+.g4 { grid-column: 6 / span 4; grid-row: span 2; }
+.g5 { grid-column: 1 / span 3; grid-row: span 3; }
+.g6 { grid-column: 4 / span 4; grid-row: span 3; }
+.g7 { grid-column: 8 / span 5; grid-row: span 3; }
+@media (max-width: 800px) {
+  .gallery-intro { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 60px; }
+  .g1 { grid-column: span 6; grid-row: span 5; }
+  .g2 { grid-column: span 3; grid-row: span 3; }
+  .g3 { grid-column: span 3; grid-row: span 3; }
+  .g4 { grid-column: span 3; grid-row: span 3; }
+  .g5 { grid-column: span 3; grid-row: span 3; }
+  .g6 { grid-column: span 6; grid-row: span 3; }
+  .g7 { grid-column: span 6; grid-row: span 3; }
+}
+
+/* ============ FOOTER ============ */
+.footer { padding: 80px 0 60px; border-top: 1px solid var(--rule); text-align: center; }
+.footer .closing {
+  font-family: var(--script); font-size: 64px; line-height: 1; color: var(--accent); margin-bottom: 28px;
+}
+.footer .sub { font-family: var(--mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-soft); }
+
+/* ============ TWEAKS PANEL (vanilla) ============ */
+.tweaks-panel {
+  position: fixed; bottom: 24px; right: 24px; z-index: 100;
+  width: 320px; max-height: 80vh; overflow-y: auto;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  box-shadow: 0 20px 50px var(--shadow);
+  padding: 18px 20px 20px;
+  display: none;
+  font-family: var(--sans);
+}
+.tweaks-panel.is-on { display: block; }
+.tweaks-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--rule-soft); }
+.tweaks-head .t { font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-soft); }
+.tweaks-head .x { font-size: 18px; line-height: 1; padding: 4px 8px; color: var(--ink-soft); }
+.tweaks-section { margin-bottom: 18px; }
+.tweaks-section .h { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px; }
+.tweaks-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 6px 0; font-size: 13px; }
+.tweaks-row label { font-family: var(--sans); font-size: 13px; color: var(--ink); }
+.tw-input {
+  width: 100%; background: transparent;
+  border: none; border-bottom: 1px solid var(--rule-soft);
+  padding: 6px 0;
+  font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink);
+  outline: none;
+}
+.tw-input:focus { border-color: var(--accent); }
+.tw-segment { display: flex; gap: 4px; background: var(--bg); padding: 3px; border: 1px solid var(--rule-soft); }
+.tw-segment button {
+  flex: 1; padding: 6px 10px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.tw-segment button.is-on { background: var(--ink); color: var(--paper); }
+.tw-toggle {
+  width: 36px; height: 20px; border-radius: 999px;
+  background: var(--rule-soft);
+  position: relative; cursor: pointer; transition: background 200ms;
+  flex-shrink: 0;
+}
+.tw-toggle::after {
+  content: ""; position: absolute; top: 2px; left: 2px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--paper); box-shadow: 0 1px 3px var(--shadow);
+  transition: transform 200ms;
+}
+.tw-toggle.is-on { background: var(--accent); }
+.tw-toggle.is-on::after { transform: translateX(16px); }
+.tweaks-section .tweaks-row + .tweaks-row { border-top: 1px dashed var(--rule-soft); }
+
+/* ============ ANIM ============ */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 800ms ease, transform 800ms ease; }
+.reveal.is-in { opacity: 1; transform: none; }
+
+/* utility */
+.hidden { display: none !important; }
+
+/* selection */
+::selection { background: var(--accent); color: var(--paper); }
+</style>
+</head>
+<body data-theme="light">
+
+<!-- NAV -->
+<nav class="nav" aria-label="Hlavní">
+  <div class="nav-mark"><span data-tw="name1">Káťa</span><span class="amp">&</span><span data-tw="name2">Chris</span></div>
+  <div class="nav-meta"><span data-tw="date_short">08 / 08 / 2026</span> · Zřícenina v lese</div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <!-- Ruined church facade — line-art leitmotif drawn from the venue -->
+  <svg class="topo topo-1" viewBox="0 0 800 800" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" style="color: var(--accent)">
+      <!-- left ruined wall, broken jagged crown -->
+      <path d="M232 770 L232 300 L250 232 L256 286 L274 244 L286 250 L300 214 L312 286 L324 252 L336 770"/>
+      <!-- left inner jamb up to springline -->
+      <path d="M336 770 L336 452"/>
+      <!-- central round arch -->
+      <path d="M336 452 Q 336 300 470 300 Q 604 300 604 452"/>
+      <!-- right inner jamb -->
+      <path d="M604 452 L604 770"/>
+      <!-- right ruined wall, broken jagged crown -->
+      <path d="M604 770 L604 270 L618 214 L628 280 L644 232 L656 252 L668 210 L680 286 L694 246 L708 770"/>
+    </g>
+    <!-- arch inner order -->
+    <g fill="none" stroke="currentColor" stroke-width="1" opacity="0.55" style="color: var(--accent)">
+      <path d="M360 452 Q 360 324 470 324 Q 580 324 580 452"/>
+    </g>
+    <!-- faint brick courses for texture -->
+    <g fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.32" style="color: var(--ink-soft)">
+      <path d="M232 380 H336 M604 380 H708"/>
+      <path d="M232 440 H336 M604 440 H708"/>
+      <path d="M232 500 H336 M604 500 H708"/>
+      <path d="M232 560 H336 M604 560 H708"/>
+      <path d="M232 620 H336 M604 620 H708"/>
+      <path d="M232 680 H336 M604 680 H708"/>
+    </g>
+  </svg>
+  <!-- spruce stand -->
+  <svg class="topo topo-2" viewBox="0 0 600 600" aria-hidden="true">
+    <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round" style="color: var(--accent)">
+      <!-- tall spruce 1 -->
+      <path d="M180 560 L180 120 M180 150 L132 220 M180 150 L228 220 M180 210 L120 296 M180 210 L240 296 M180 280 L108 380 M180 280 L252 380 M180 360 L96 470 M180 360 L264 470"/>
+      <!-- spruce 2 -->
+      <path d="M360 560 L360 200 M360 224 L322 280 M360 224 L398 280 M360 272 L312 340 M360 272 L408 340 M360 332 L300 414 M360 332 L420 414 M360 400 L290 492 M360 400 L430 492"/>
+    </g>
+  </svg>
+
+  <div class="hero-grid">
+    <div class="hero-tag eyebrow">
+      <span>Pozvánka</span>
+      <span class="line"></span>
+      <span>Save the date · 8. srpna 2026</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="row"><span data-tw="name1">Káťa</span></span>
+      <span class="row" style="padding-left: 6%"><span class="script-amp">&</span></span>
+      <span class="row r2"><span data-tw="name2">Chris</span></span>
+    </h1>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="k">Datum</div>
+        <div class="v"><span data-tw="date_long">Sobota 8. srpna 2026</span></div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="k">Místo</div>
+        <div class="v"><span data-tw="place">Zřícenina kostela sv. Jana Křtitele</span></div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="k">Čas</div>
+        <div class="v">v poledne · 12:00</div>
+      </div>
+    </div>
+  </div>
+  <div class="crater-mark">Zřícenina kostela sv. Jana Křtitele · v lese</div>
+  <div class="scroll-cue">Pokračuj dolů</div>
+</header>
+
+<main>
+
+<!-- STORY -->
+<section id="story" data-section="story">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="num">01 — O nás</div>
+      <h2>Než došlo na <em>ano</em></h2>
+    </header>
+    <div class="story-grid">
+      <div class="body">
+        <p class="dropcap">Jsme spolu čtyři roky a rok a půl z toho jsme strávili na cestě. Nový Zéland, Austrálie, jihovýchodní Asie. Spali jsme v autech, batozích, kempech i ve městech, kde jsme nikoho neznali. A vždycky jsme se měli pořád stejně rádi.</p>
+        <p>Zasnoubili jsme se na kraji kráteru sopky Bromo na Jávě. Vítr, popel pod nohama, dlouhé ticho. Pak ano. Pak slza. Pak ráno čaj na rezavé verandě a pocit, že už jsme dávno spolu, jen jsme tomu konečně dali jméno.</p>
+        <p>To bylo před rokem a kus. Že nám pak trvalo začít plánovat, nezapřeme — když to jde okolnostem natruc, dokážeme přejet půlku planety, ale objednat sál nás polož<i>í</i>. <em>Konečně</em> to ale bereme do ruky a zveme vás na svatbu malou, venkovní, jen pro nejbližší.</p>
+      </div>
+      <aside>
+        <blockquote class="story-pull">
+          „Cestovali jsme přes půlku světa a ani jednou se neztratili. Plán svatby nám trval rok. Asi to byla větší výzva.“
+          <span class="sig">— Káťa &amp; Chris, jaro 2026</span>
+        </blockquote>
+        <div class="travel-map">
+          <div class="caption">Naše společná mapa</div>
+          <svg viewBox="0 0 400 220" style="width: 100%; height: auto;" aria-hidden="true">
+            <!-- minimal world map: only the regions we travelled -->
+            <g fill="none" stroke="currentColor" stroke-width="1" style="color: var(--ink-soft); opacity: 0.5">
+              <!-- Europe -->
+              <path d="M195 60 Q 200 55 210 58 Q 220 62 215 72 Q 205 78 200 75 Q 195 70 195 60 Z"/>
+              <!-- SE Asia rough -->
+              <path d="M275 110 Q 285 100 295 105 Q 305 115 300 125 Q 290 130 280 125 Q 275 120 275 110 Z"/>
+              <path d="M295 125 q 5 -2 8 1 q 0 4 -3 6 q -6 0 -5 -7 z"/>
+              <path d="M305 132 q 6 -1 10 3 q -2 5 -6 5 q -6 -1 -4 -8 z"/>
+              <!-- Australia -->
+              <path d="M310 150 Q 330 145 350 152 Q 358 165 348 178 Q 325 185 312 175 Q 305 162 310 150 Z"/>
+              <!-- New Zealand -->
+              <path d="M365 178 q 4 -3 7 0 q 1 5 -2 8 q -6 0 -5 -8 z"/>
+              <path d="M370 188 q 4 -1 5 2 q -1 5 -4 5 q -4 -1 -1 -7 z"/>
+            </g>
+            <!-- Travel arc dotted lines -->
+            <g fill="none" stroke="currentColor" stroke-width="0.8" stroke-dasharray="2 3" style="color: var(--accent)">
+              <path d="M205 67 Q 250 30, 295 115" />
+              <path d="M295 115 Q 320 130, 335 165" />
+              <path d="M335 165 Q 355 175, 370 182" />
+              <path d="M295 115 Q 305 122, 308 130" />
+            </g>
+            <!-- Markers -->
+            <g style="color: var(--accent)" fill="currentColor">
+              <circle cx="205" cy="67" r="2"/>
+              <circle cx="295" cy="115" r="3"/>
+              <circle cx="335" cy="165" r="2.5"/>
+              <circle cx="370" cy="182" r="2"/>
+            </g>
+            <!-- Labels -->
+            <g font-family="DM Mono, monospace" font-size="6.5" fill="currentColor" style="color: var(--ink-soft)" letter-spacing="0.5">
+              <text x="208" y="64">Praha</text>
+              <text x="298" y="111" text-anchor="start">Java · Bromo ★</text>
+              <text x="305" y="170">Austrálie</text>
+              <text x="345" y="195">Nový Zéland</text>
+            </g>
+          </svg>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section id="countdown" data-section="countdown" style="padding: 60px 0;">
+  <div class="wrap-narrow">
+    <div class="countdown">
+      <div class="lead">Zbývá do velkého dne</div>
+      <div class="countdown-grid" id="cd-grid">
+        <div class="cd-unit"><div class="n" id="cd-d">—</div><div class="l">Dní</div></div>
+        <div class="cd-unit"><div class="n" id="cd-h">—</div><div class="l">Hodin</div></div>
+        <div class="cd-unit"><div class="n" id="cd-m">—</div><div class="l">Minut</div></div>
+        <div class="cd-unit"><div class="n" id="cd-s">—</div><div class="l">Sekund</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section id="program" data-section="program">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="num">02 — Program dne</div>
+      <h2>Jak to celé proběhne</h2>
+    </header>
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="time">11:30</div>
+        <div class="title">Sraz hostů</div>
+        <div class="desc">Sejdeme se kousek od obřadu, přivítáme se a dáme si skleničku něčeho šumivého. Přesné místo srazu pošleme týden předem.</div>
+      </div>
+      <div class="tl-row is-ceremony">
+        <div class="time">12:00</div>
+        <div class="title">Obřad</div>
+        <div class="desc">Krátký obřad pod širým nebem. Žádné zbytečné tradice, jen pár slov, která jsme si pro sebe připravili, a lidi, na kterých nám záleží.</div>
+      </div>
+      <div class="tl-row">
+        <div class="time">13:00</div>
+        <div class="title">Focení &amp; pauza</div>
+        <div class="desc">Vyfotíme se všichni společně a pak bude chvíli čas jen tak postávat, dát si něco k pití a popovídat si.</div>
+      </div>
+      <div class="tl-row">
+        <div class="time">14:30</div>
+        <div class="title">Oběd &amp; slavení</div>
+        <div class="desc">Přesuneme se do Hotelu Olympia v Mariánských Lázních. Sedneme si ke společnému stolu, v klidu se najíme a připijeme si. Jídlo si vyberete v RSVP níž.</div>
+      </div>
+      <div class="tl-row">
+        <div class="time">17:30</div>
+        <div class="title">Loučení &amp; cesta domů</div>
+        <div class="desc">Dojíme, připijeme si naposled a pomalu se rozloučíme. Díky, že jste u toho s námi byli.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLACE -->
+<section id="place" data-section="place">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="num">03 — Místo</div>
+      <h2>Dvě místa, jeden den</h2>
+    </header>
+    <div class="place-grid">
+      <div class="place-card">
+        <div>
+          <div class="label">Obřad · 12:00</div>
+          <h3>Zřícenina kostela sv. Jana Křtitele</h3>
+          <p>Bereme se venku u staré zarostlé zříceniny kostela uprostřed lesa. Holé zdi, kamenný oblouk a stromy všude kolem. Zaparkovat se dá kousek od kostela, jsme v přírodě, takže v podstatě kdekoliv podél silnice.</p>
+        </div>
+        <a href="https://maps.app.goo.gl/fjEY7qX51t42NN5D7" target="_blank" rel="noopener" class="link">Otevřít v mapách →</a>
+      </div>
+      <div class="map-frame">
+        <iframe
+          src="https://maps.google.com/maps?q=49.7935169,12.7354659&z=14&output=embed&hl=cs"
+          style="border:0;width:100%;height:100%;display:block;"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Zřícenina kostela sv. Jana Křtitele"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+    <div class="place-grid" style="margin-top: 40px;">
+      <div class="place-card">
+        <div>
+          <div class="label">Oběd &amp; slavení · 14:30</div>
+          <h3>Hotel Olympia, Mariánské Lázně</h3>
+          <p>Po obřadu a focení vyrazíme do Spa &amp; Wellness Hotelu Olympia v Mariánských Lázních. Tam se v klidu najíme, připijeme si a kolem 17:30 se rozloučíme.</p>
+        </div>
+        <a href="https://maps.app.goo.gl/TGqqULRHQeWXNh2q8" target="_blank" rel="noopener" class="link">Otevřít v mapách →</a>
+      </div>
+      <div class="map-frame">
+        <iframe
+          src="https://maps.google.com/maps?q=49.9760971,12.7011232&z=15&output=embed&hl=cs"
+          style="border:0;width:100%;height:100%;display:block;"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Hotel Olympia, Mariánské Lázně"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRESS CODE -->
+<section id="dress" data-section="dress">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="num">04 — Dress code</div>
+      <h2>Pohodlně, ale ne v žabkách</h2>
+    </header>
+    <div class="dress-grid">
+      <div class="lead">
+        <p class="lede">Jdeme do lesa a budeme tam dlouho, na trávě a kolem starých zdí. Vezměte si cokoliv, v čem se cítíte dobře a vydržíte celý den.</p>
+        <p>Žádné obleky na míru ani večerní róby. Pánové klidně lněné kalhoty a košili, sako nemusí být. Dámy midi, dlouhé šaty nebo overal, co vám sedne. Sandály v pohodě, na podpatky bych nesázel (tráva je tráva).</p>
+        <p>Kdybyste chtěli ladit, tady je pár barev, co k tomu místu sedí. Nic povinného, jen tip.</p>
+      </div>
+      <div class="palette">
+        <div class="swatch"><div class="chip" style="background:#3A4A2E"></div><div class="name">Jehličí</div></div>
+        <div class="swatch"><div class="chip" style="background:#8A8A6E"></div><div class="name">Mech</div></div>
+        <div class="swatch"><div class="chip" style="background:#9E5A3C"></div><div class="name">Cihla</div></div>
+        <div class="swatch"><div class="chip" style="background:#E0D4BC"></div><div class="name">Kámen</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIFTS -->
+<section id="gifts" data-section="gifts">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="num">05 — Dary</div>
+      <h2>Stačí, že přijdete</h2>
+    </header>
+    <div class="gift">
+      <div class="quote">
+        „Největší dárek je, že s námi ten den strávíte. Kdybyste i tak chtěli něco přidat, šetříme si na <em>další</em> cestu — budeme rádi za příspěvek do kasičky.“
+        <span class="stamp">díky předem</span>
+      </div>
+      <div class="detail">
+        <dl>
+          <dt>Účet</dt><dd>9807250001/5500</dd>
+        </dl>
+        <img src="data:image/png;base64,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" alt="QR kód pro platbu" style="margin-top: 22px; width: 140px; height: 140px; display: block; image-rendering: pixelated;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section id="rsvp" data-section="rsvp">
+  <div class="rsvp">
+    <div class="wrap">
+      <header class="section-head">
+        <div class="num">06 — RSVP</div>
+        <h2>Potvrď, prosíme, do <span data-tw="rsvp_deadline">31. července 2026</span></h2>
+      </header>
+      <p class="lead">Hotel po nás chce počty a výběr jídel s předstihem, tak nám prosím dej vědět svoji volbu i případné alergie už teď. Díky!</p>
+
+      <form class="rsvp-form" id="rsvp-form" novalidate>
+        <div class="field full">
+          <label>Účast</label>
+          <div class="attendance">
+            <label><input type="radio" name="attendance" value="yes" checked><span class="att-mark"></span>S radostí přijdeme</label>
+            <label><input type="radio" name="attendance" value="no"><span class="att-mark"></span>Bohužel nedorazíme</label>
+          </div>
+        </div>
+
+        <div class="field"><label>Jméno a příjmení</label><input type="text" name="name" required placeholder="Jan Novák"></div>
+        <div class="field"><label>E-mail</label><input type="email" name="email" required placeholder="jan@example.com"></div>
+        <div class="field">
+          <label>Počet osob</label>
+          <select name="count">
+            <option>1</option><option>2</option><option>3</option><option>4</option>
+          </select>
+        </div>
+        <div class="field"><label>Doprovod (jméno)</label><input type="text" name="plus" placeholder="volitelné"></div>
+
+        <div class="field full">
+          <label>Výběr jídla</label>
+          <div class="meal-options">
+            <label class="meal-card">
+              <input type="radio" name="meal" value="a" checked>
+              <div class="letter">A</div>
+              <div class="name">Pečená kachna<br>s knedlíkem a zelím</div>
+              <div class="note">klasika · obsahuje lepek</div>
+            </label>
+            <label class="meal-card">
+              <input type="radio" name="meal" value="b">
+              <div class="letter">B</div>
+              <div class="name">Pstruh na másle<br>s grilovanou zeleninou</div>
+              <div class="note">lehčí · ryba · laktóza</div>
+            </label>
+            <label class="meal-card">
+              <input type="radio" name="meal" value="c">
+              <div class="letter">C</div>
+              <div class="name">Pečená dýně<br>s burgholskou polentou</div>
+              <div class="note">vegetariánské · vegan na vyžádání</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label>Alergeny &amp; speciální požadavky</label>
+          <textarea name="allergens" placeholder="Cokoli, co bychom měli vědět — alergie, intolerance, dieta…"></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Vzkaz pro nás (volitelné)</label>
+          <textarea name="message" placeholder="Cokoli chceš dopsat — gratulace, vtip, prosba o pomoc s ubytováním…"></textarea>
+        </div>
+
+        <div class="submit-row">
+          <div class="rsvp-deadline">Deadline: <span data-tw="rsvp_deadline">31. července 2026</span></div>
+          <button type="submit" class="btn-submit">Odeslat odpověď</button>
+        </div>
+      </form>
+
+      <div class="rsvp-thanks" id="rsvp-thanks">
+        Díky! Máme tě v seznamu a brzo se ozveme s přesnostmi k místu a času. ✦
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" data-section="contact">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="num">07 — Kontakty</div>
+      <h2>Když se něco zvrtne</h2>
+    </header>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="role">Koordinátorka dne</div>
+        <div class="name">Andrejka</div>
+        <div class="phone"><a href="tel:+420728125909" style="text-decoration:none">+420 728 125 909</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" data-section="gallery">
+  <div class="wrap">
+    <header class="section-head">
+      <div class="num">08 — Naše cesty</div>
+      <h2>Kousek z toho, kde jsme byli</h2>
+    </header>
+    <div class="gallery-intro">
+      <div></div>
+      <p>Než jsme se rozhodli někde konečně zakotvit, projeli jsme Nový Zéland, Austrálii a jihovýchodní Asii. Pár momentů, na které rádi vzpomínáme.</p>
+    </div>
+    <div class="gallery-grid">
+      <image-slot class="g1" id="travel-1" placeholder="NZ · jezera"></image-slot>
+      <image-slot class="g2" id="travel-2" placeholder="Austrálie"></image-slot>
+      <image-slot class="g3" id="travel-3" placeholder="Bromo · Java"></image-slot>
+      <image-slot class="g4" id="travel-4" placeholder="Bali"></image-slot>
+      <image-slot class="g5" id="travel-5" placeholder="Cesta"></image-slot>
+      <image-slot class="g6" id="travel-6" placeholder="Spolu"></image-slot>
+      <image-slot class="g7" id="travel-7" placeholder="Domů"></image-slot>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap-narrow">
+    <div class="closing">Těšíme se na vás!</div>
+    <div class="sub">Káťa &amp; Chris · <span data-tw="date_long">Sobota 8. srpna 2026</span></div>
+  </div>
+</footer>
+
+<!-- TWEAKS PANEL -->
+<aside class="tweaks-panel" id="tweaks-panel" aria-label="Tweaks">
+  <div class="tweaks-head">
+    <div class="t">Tweaks</div>
+    <button class="x" id="tw-close" aria-label="Zavřít">×</button>
+  </div>
+
+  <div class="tweaks-section">
+    <div class="h">Vzhled</div>
+    <div class="tweaks-row">
+      <label>Téma</label>
+      <div class="tw-segment" data-tw-segment="theme">
+        <button data-val="light" class="is-on">Light</button>
+        <button data-val="dark">Dark</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tweaks-section">
+    <div class="h">Texty</div>
+    <div class="tweaks-row" style="flex-direction: column; align-items: stretch; gap: 4px;">
+      <label>Jméno 1</label><input class="tw-input" data-tw-input="name1" value="Káťa">
+    </div>
+    <div class="tweaks-row" style="flex-direction: column; align-items: stretch; gap: 4px;">
+      <label>Jméno 2</label><input class="tw-input" data-tw-input="name2" value="Chris">
+    </div>
+    <div class="tweaks-row" style="flex-direction: column; align-items: stretch; gap: 4px;">
+      <label>Datum (krátké)</label><input class="tw-input" data-tw-input="date_short" value="08 / 08 / 2026">
+    </div>
+    <div class="tweaks-row" style="flex-direction: column; align-items: stretch; gap: 4px;">
+      <label>Datum (dlouhé)</label><input class="tw-input" data-tw-input="date_long" value="Sobota 8. srpna 2026">
+    </div>
+    <div class="tweaks-row" style="flex-direction: column; align-items: stretch; gap: 4px;">
+      <label>Místo</label><input class="tw-input" data-tw-input="place" value="Zřícenina kostela sv. Jana Křtitele">
+    </div>
+    <div class="tweaks-row" style="flex-direction: column; align-items: stretch; gap: 4px;">
+      <label>RSVP deadline</label><input class="tw-input" data-tw-input="rsvp_deadline" value="31. července 2026">
+    </div>
+    <div class="tweaks-row" style="flex-direction: column; align-items: stretch; gap: 4px;">
+      <label>Datum svatby (ISO, pro odpočet)</label><input class="tw-input" data-tw-input="wedding_iso" value="2026-08-08T12:00:00">
+    </div>
+  </div>
+
+  <div class="tweaks-section">
+    <div class="h">Sekce</div>
+    <div class="tweaks-row"><label>Příběh</label><div class="tw-toggle is-on" data-tw-section="story"></div></div>
+    <div class="tweaks-row"><label>Odpočet</label><div class="tw-toggle is-on" data-tw-section="countdown"></div></div>
+    <div class="tweaks-row"><label>Program</label><div class="tw-toggle is-on" data-tw-section="program"></div></div>
+    <div class="tweaks-row"><label>Místo</label><div class="tw-toggle is-on" data-tw-section="place"></div></div>
+    <div class="tweaks-row"><label>Dress code</label><div class="tw-toggle is-on" data-tw-section="dress"></div></div>
+    <div class="tweaks-row"><label>Dary</label><div class="tw-toggle is-on" data-tw-section="gifts"></div></div>
+    <div class="tweaks-row"><label>RSVP</label><div class="tw-toggle is-on" data-tw-section="rsvp"></div></div>
+    <div class="tweaks-row"><label>Kontakty</label><div class="tw-toggle is-on" data-tw-section="contact"></div></div>
+    <div class="tweaks-row"><label>Galerie</label><div class="tw-toggle is-on" data-tw-section="gallery"></div></div>
+  </div>
+</aside>
+
+<script>
+/* ============ TWEAKS DEFAULTS ============ */
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "theme": "light",
+  "name1": "Káťa",
+  "name2": "Chris",
+  "date_short": "08 / 08 / 2026",
+  "date_long": "Sobota 8. srpna 2026",
+  "place": "Zřícenina kostela sv. Jana Křtitele",
+  "rsvp_deadline": "31. července 2026",
+  "wedding_iso": "2026-08-08T12:00:00",
+  "sections": {
+    "story": true, "countdown": true, "program": true, "place": true,
+    "dress": true, "gifts": true, "rsvp": true, "contact": true, "gallery": true
+  }
+}/*EDITMODE-END*/;
+
+/* ============ APPLY ============ */
+function applyTheme(theme) {
+  document.body.dataset.theme = theme;
+  document.querySelectorAll('[data-tw-segment="theme"] button').forEach(b => {
+    b.classList.toggle('is-on', b.dataset.val === theme);
+  });
+}
+function applyText(key, value) {
+  document.querySelectorAll('[data-tw="' + key + '"]').forEach(el => { el.textContent = value; });
+}
+function applySection(key, on) {
+  const el = document.querySelector('[data-section="' + key + '"]');
+  if (el) el.classList.toggle('hidden', !on);
+  const t = document.querySelector('[data-tw-section="' + key + '"]');
+  if (t) t.classList.toggle('is-on', !!on);
+}
+
+function applyAll(t) {
+  applyTheme(t.theme);
+  ['name1','name2','date_short','date_long','place','rsvp_deadline'].forEach(k => applyText(k, t[k]));
+  Object.keys(t.sections || {}).forEach(k => applySection(k, t.sections[k]));
+}
+
+applyAll(TWEAKS);
+
+/* ============ COUNTDOWN ============ */
+function tickCountdown() {
+  const target = new Date(TWEAKS.wedding_iso).getTime();
+  const now = Date.now();
+  const diff = Math.max(0, target - now);
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-d').textContent = String(d).padStart(3, '0');
+  document.getElementById('cd-h').textContent = String(h).padStart(2, '0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2, '0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2, '0');
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+/* ============ TWEAKS UI ============ */
+const panel = document.getElementById('tweaks-panel');
+function persist(edits) {
+  try { window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*'); } catch(e) {}
+}
+
+// Listener for host activate/deactivate
+window.addEventListener('message', (e) => {
+  if (!e.data || typeof e.data !== 'object') return;
+  if (e.data.type === '__activate_edit_mode') panel.classList.add('is-on');
+  if (e.data.type === '__deactivate_edit_mode') panel.classList.remove('is-on');
+});
+// Announce
+try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch(e) {}
+
+// Close
+document.getElementById('tw-close').addEventListener('click', () => {
+  panel.classList.remove('is-on');
+  try { window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*'); } catch(e) {}
+});
+
+// Theme segment
+document.querySelectorAll('[data-tw-segment="theme"] button').forEach(b => {
+  b.addEventListener('click', () => {
+    const v = b.dataset.val;
+    TWEAKS.theme = v;
+    applyTheme(v);
+    persist({ theme: v });
+  });
+});
+
+// Text inputs
+document.querySelectorAll('[data-tw-input]').forEach(i => {
+  i.addEventListener('input', () => {
+    const key = i.dataset.twInput;
+    TWEAKS[key] = i.value;
+    if (key !== 'wedding_iso') applyText(key, i.value);
+    if (key === 'wedding_iso') tickCountdown();
+    const edits = {}; edits[key] = i.value;
+    persist(edits);
+  });
+});
+
+// Section toggles
+document.querySelectorAll('[data-tw-section]').forEach(t => {
+  t.addEventListener('click', () => {
+    const key = t.dataset.twSection;
+    const on = !t.classList.contains('is-on');
+    TWEAKS.sections[key] = on;
+    applySection(key, on);
+    persist({ sections: { ...TWEAKS.sections } });
+  });
+});
+
+/* ============ RSVP MOCK ============ */
+document.getElementById('rsvp-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  document.getElementById('rsvp-form').style.display = 'none';
+  document.getElementById('rsvp-thanks').classList.add('is-on');
+  window.scrollBy({ top: -40, behavior: 'smooth' });
+});
+
+/* ============ SCROLL REVEAL ============ */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('is-in'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('section, .hero-meta, .gallery-grid > *').forEach(el => {
+  el.classList.add('reveal');
+  io.observe(el);
+});
+</script>
+</body>
+</html>
