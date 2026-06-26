@@ -164,6 +164,24 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; letter-spacing: -0
 [data-theme="dark"] .topo { opacity: 0.35; }
 [data-theme="dark"] .topo-2 { opacity: 0.22; }
 
+/* --- Mobilní hero: motiv jako jemný vodoznak za textem --- */
+@media (max-width: 640px) {
+  .hero { padding-top: 92px; }
+
+  .topo-1 {
+    width: min(86vw, 400px);
+    height: auto;
+    top: 16%;
+    right: 50%;
+    bottom: auto;
+    transform: translateX(50%);   /* vycentrovat na šířku */
+    opacity: 0.12;                /* jen náznak, nečte se přes text */
+  }
+  [data-theme="dark"] .topo-1 { opacity: 0.16; }
+
+  .topo-2 { display: none; }      /* spodní jehličnany na mobilu pryč */
+}
+
 .crater-mark {
   position: absolute;
   right: 32px;
@@ -253,7 +271,10 @@ section { padding: 110px 0; position: relative; }
   color: var(--ink-soft); margin-top: 12px;
 }
 @media (max-width: 640px) {
-  .countdown-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  /* Odpočet v jedné řadě (D · H · M · S) — čte se lineárně, ne cik-cak */
+  .countdown-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .cd-unit .n { font-size: clamp(30px, 12vw, 56px); }
+  .cd-unit .l { font-size: 9px; letter-spacing: 0.12em; margin-top: 10px; }
 }
 
 /* ============ PROGRAM TIMELINE ============ */
@@ -677,7 +698,7 @@ section { padding: 110px 0; position: relative; }
 <section id="countdown" data-section="countdown" style="padding: 60px 0;">
   <div class="wrap-narrow">
     <div class="countdown">
-      <div class="lead">Zbývá do velkého dne</div>
+      <div class="lead">Do velkého dne zbývá</div>
       <div class="countdown-grid" id="cd-grid">
         <div class="cd-unit"><div class="n" id="cd-d">—</div><div class="l">Dní</div></div>
         <div class="cd-unit"><div class="n" id="cd-h">—</div><div class="l">Hodin</div></div>
@@ -784,9 +805,9 @@ section { padding: 110px 0; position: relative; }
     </header>
     <div class="dress-grid">
       <div class="lead">
-        <p class="lede">Jdeme do lesa a budeme tam dlouho, na trávě a kolem starých zdí. Vezměte si cokoliv, v čem se cítíte dobře a vydržíte celý den.</p>
-        <p>Žádné obleky na míru ani večerní róby. Pánové klidně lněné kalhoty a košili, sako nemusí být. Dámy midi, dlouhé šaty nebo overal, co vám sedne. Sandály v pohodě, na podpatky bych nesázel (tráva je tráva).</p>
-        <p>Kdybyste chtěli ladit, tady je pár barev, co k tomu místu sedí. Nic povinného, jen tip.</p>
+        <p class="lede">Míříme do přírody, takže smokingy nechte v šatníku. Oblečte se tak, abyste se cítili dobře na trávě, v lese, u zříceniny kostela a jeho prastarých zdí.</p>
+        <p>Pánům stačí košile a kalhoty (sako netřeba), dámám pohodlné šaty nebo overal. Místo podpatků doporučujeme sandály nebo klidně tenisky – tráva zkrátka podpatky neodpouští. Jen ty žabky raději vynechte.</p>
+        <p>Nevíte jakou barvu? Tady je naše paletka, ale berte ji jen jako absolutně nezávazný tip.</p>
       </div>
       <div class="palette">
         <div class="swatch"><div class="chip" style="background:#3A4A2E"></div><div class="name">Jehličí</div></div>
@@ -802,12 +823,12 @@ section { padding: 110px 0; position: relative; }
 <section id="gifts" data-section="gifts">
   <div class="wrap">
     <header class="section-head">
-      <div class="num">05 — Dary</div>
-      <h2>Stačí, že přijdete</h2>
+      <div class="num">05 — Svatební dary</div>
+      <h2>Nejdůležitější je, že přijedete</h2>
     </header>
     <div class="gift">
       <div class="quote">
-        „Největší dárek je, že s námi ten den strávíte. Kdybyste i tak chtěli něco přidat, šetříme si na <em>další</em> cestu — budeme rádi za příspěvek do kasičky.“
+        „Svojí účastí nám uděláte největší radost. Kdybyste nás přesto chtěli obdarovat, potěší nás finanční příspěvek na naše cestovatelské plány.”
         <span class="stamp">díky předem</span>
       </div>
       <div class="detail">
@@ -821,7 +842,7 @@ section { padding: 110px 0; position: relative; }
 </section>
 
 <!-- RSVP -->
-<section id="rsvp" data-section="rsvp">
+<section id="rsvp" data-section="rsvp" style="display:none">
   <div class="rsvp">
     <div class="wrap">
       <header class="section-head">
@@ -900,7 +921,7 @@ section { padding: 110px 0; position: relative; }
 <section id="contact" data-section="contact">
   <div class="wrap">
     <header class="section-head">
-      <div class="num">07 — Kontakty</div>
+      <div class="num">06 — Kontakty</div>
       <h2>Když se něco zvrtne</h2>
     </header>
     <div class="contact-grid">
@@ -917,7 +938,7 @@ section { padding: 110px 0; position: relative; }
 <section id="gallery" data-section="gallery">
   <div class="wrap">
     <header class="section-head">
-      <div class="num">08 — Naše cesty</div>
+      <div class="num">07 — Naše cesty</div>
       <h2>Kousek z toho, kde jsme byli</h2>
     </header>
     <div class="gallery-intro">
