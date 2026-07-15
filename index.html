@@ -477,28 +477,36 @@ section { padding: 110px 0; position: relative; }
 .gallery-intro { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; margin-bottom: 50px; align-items: end; }
 .gallery-intro p { font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.45; max-width: 44ch; }
 .gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 80px; gap: 14px; }
-.gallery-grid image-slot {
-  width: 100%; height: 100%; display: block;
+.gallery-grid figure {
+  margin: 0; position: relative; overflow: hidden;
   background: var(--paper);
-  border: 1px solid var(--rule-soft);
+  border: 1px solid var(--rule);
+  padding: 8px;
 }
-.g1 { grid-column: 1 / span 5; grid-row: span 5; }
-.g2 { grid-column: 6 / span 4; grid-row: span 3; }
-.g3 { grid-column: 10 / span 3; grid-row: span 4; }
-.g4 { grid-column: 6 / span 4; grid-row: span 2; }
-.g5 { grid-column: 1 / span 3; grid-row: span 3; }
-.g6 { grid-column: 4 / span 4; grid-row: span 3; }
-.g7 { grid-column: 8 / span 5; grid-row: span 3; }
+.gallery-grid figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery-grid figcaption {
+  position: absolute; left: 18px; bottom: 18px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #F6F1E6; background: rgba(37,48,31,0.6);
+  padding: 5px 10px;
+}
+.g1  { grid-column: 1 / span 4;  grid-row: 1 / span 3; }
+.g2  { grid-column: 5 / span 5;  grid-row: 1 / span 3; }
+.g3  { grid-column: 10 / span 3; grid-row: 1 / span 4; }
+.g4  { grid-column: 1 / span 4;  grid-row: 4 / span 3; }
+.g5  { grid-column: 5 / span 5;  grid-row: 4 / span 3; }
+.g6  { grid-column: 10 / span 3; grid-row: 5 / span 4; }
+.g7  { grid-column: 1 / span 4;  grid-row: 7 / span 6; }
+.g8  { grid-column: 5 / span 5;  grid-row: 7 / span 3; }
+.g9  { grid-column: 10 / span 3; grid-row: 9 / span 4; }
+.g10 { grid-column: 5 / span 5;  grid-row: 10 / span 3; }
 @media (max-width: 800px) {
   .gallery-intro { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 60px; }
-  .g1 { grid-column: span 6; grid-row: span 5; }
-  .g2 { grid-column: span 3; grid-row: span 3; }
-  .g3 { grid-column: span 3; grid-row: span 3; }
-  .g4 { grid-column: span 3; grid-row: span 3; }
-  .g5 { grid-column: span 3; grid-row: span 3; }
-  .g6 { grid-column: span 6; grid-row: span 3; }
-  .g7 { grid-column: span 6; grid-row: span 3; }
+  .gallery-grid { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 60px; grid-auto-flow: dense; }
+  .g1, .g2, .g3, .g4, .g5, .g6, .g7, .g8, .g9, .g10 { grid-column: span 6; grid-row: span 4; }
+  .g3, .g6, .g9 { grid-column: span 3; grid-row: span 5; }
+  .g10 { grid-column: span 3; grid-row: span 5; }
+  .g7 { grid-column: span 6; grid-row: span 7; }
 }
 
 /* ============ FOOTER ============ */
@@ -891,13 +899,16 @@ section { padding: 110px 0; position: relative; }
       <p>Než jsme se rozhodli někde konečně zakotvit, projeli jsme Nový Zéland, Austrálii a jihovýchodní Asii. Pár momentů, na které rádi vzpomínáme.</p>
     </div>
     <div class="gallery-grid">
-      <image-slot class="g1" id="travel-1" placeholder="NZ · jezera"></image-slot>
-      <image-slot class="g2" id="travel-2" placeholder="Austrálie"></image-slot>
-      <image-slot class="g3" id="travel-3" placeholder="Bromo · Java"></image-slot>
-      <image-slot class="g4" id="travel-4" placeholder="Bali"></image-slot>
-      <image-slot class="g5" id="travel-5" placeholder="Cesta"></image-slot>
-      <image-slot class="g6" id="travel-6" placeholder="Spolu"></image-slot>
-      <image-slot class="g7" id="travel-7" placeholder="Domů"></image-slot>
+      <figure class="g1"><img src="fotky/nz-hory.jpg" alt="Selfie v horách na Novém Zélandu" loading="lazy"><figcaption>Nový Zéland</figcaption></figure>
+      <figure class="g2"><img src="fotky/nz-wharariki.jpg" alt="Západ slunce na pláži Wharariki" loading="lazy"><figcaption>Wharariki · NZ</figcaption></figure>
+      <figure class="g3"><img src="fotky/nz-plaz.jpg" alt="Káťa na pláži při západu slunce" loading="lazy"><figcaption>Západ slunce · NZ</figcaption></figure>
+      <figure class="g4"><img src="fotky/nz-hobbiton.jpg" alt="Hobití nora v Hobbitonu" loading="lazy"><figcaption>Hobbiton · NZ</figcaption></figure>
+      <figure class="g5"><img src="fotky/sydney.jpg" alt="Před operou v Sydney" loading="lazy"><figcaption>Sydney · Austrálie</figcaption></figure>
+      <figure class="g6"><img src="fotky/singapur.jpg" alt="Vodopád Jewel na letišti Changi" loading="lazy"><figcaption>Singapur</figcaption></figure>
+      <figure class="g7"><img src="fotky/bromo.jpg" alt="Objetí pod sopkou Bromo" loading="lazy"><figcaption>Bromo · Java ★</figcaption></figure>
+      <figure class="g8"><img src="fotky/lampiony.jpg" alt="Noční plavba mezi lampiony" loading="lazy"><figcaption>Hoi An · Vietnam</figcaption></figure>
+      <figure class="g9"><img src="fotky/borobudur.jpg" alt="Chrám Borobudur na Jávě" loading="lazy"><figcaption>Borobudur · Java</figcaption></figure>
+      <figure class="g10"><img src="fotky/vodopad.jpg" alt="Polibek u vodopádu" loading="lazy"><figcaption>Bali</figcaption></figure>
     </div>
   </div>
 </section>
