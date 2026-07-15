@@ -320,7 +320,7 @@ section { padding: 110px 0; position: relative; }
 .dress-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 .dress-grid .lead p { font-size: 17px; line-height: 1.7; color: var(--ink); margin-bottom: 1em; max-width: 50ch; }
 .dress-grid .lead p.lede { font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--ink); line-height: 1.35; margin-bottom: 24px; }
-.palette { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.palette { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
 .swatch { display: flex; flex-direction: column; gap: 10px; }
 .swatch .chip { aspect-ratio: 3/4; border: 1px solid var(--rule-soft); }
 .swatch .name { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); }
@@ -654,43 +654,7 @@ section { padding: 110px 0; position: relative; }
         </blockquote>
         <div class="travel-map">
           <div class="caption">Naše společná mapa</div>
-          <svg viewBox="0 0 400 220" style="width: 100%; height: auto;" aria-hidden="true">
-            <!-- minimal world map: only the regions we travelled -->
-            <g fill="none" stroke="currentColor" stroke-width="1" style="color: var(--ink-soft); opacity: 0.5">
-              <!-- Europe -->
-              <path d="M195 60 Q 200 55 210 58 Q 220 62 215 72 Q 205 78 200 75 Q 195 70 195 60 Z"/>
-              <!-- SE Asia rough -->
-              <path d="M275 110 Q 285 100 295 105 Q 305 115 300 125 Q 290 130 280 125 Q 275 120 275 110 Z"/>
-              <path d="M295 125 q 5 -2 8 1 q 0 4 -3 6 q -6 0 -5 -7 z"/>
-              <path d="M305 132 q 6 -1 10 3 q -2 5 -6 5 q -6 -1 -4 -8 z"/>
-              <!-- Australia -->
-              <path d="M310 150 Q 330 145 350 152 Q 358 165 348 178 Q 325 185 312 175 Q 305 162 310 150 Z"/>
-              <!-- New Zealand -->
-              <path d="M365 178 q 4 -3 7 0 q 1 5 -2 8 q -6 0 -5 -8 z"/>
-              <path d="M370 188 q 4 -1 5 2 q -1 5 -4 5 q -4 -1 -1 -7 z"/>
-            </g>
-            <!-- Travel arc dotted lines -->
-            <g fill="none" stroke="currentColor" stroke-width="0.8" stroke-dasharray="2 3" style="color: var(--accent)">
-              <path d="M205 67 Q 250 30, 295 115" />
-              <path d="M295 115 Q 320 130, 335 165" />
-              <path d="M335 165 Q 355 175, 370 182" />
-              <path d="M295 115 Q 305 122, 308 130" />
-            </g>
-            <!-- Markers -->
-            <g style="color: var(--accent)" fill="currentColor">
-              <circle cx="205" cy="67" r="2"/>
-              <circle cx="295" cy="115" r="3"/>
-              <circle cx="335" cy="165" r="2.5"/>
-              <circle cx="370" cy="182" r="2"/>
-            </g>
-            <!-- Labels -->
-            <g font-family="DM Mono, monospace" font-size="6.5" fill="currentColor" style="color: var(--ink-soft)" letter-spacing="0.5">
-              <text x="208" y="64">Praha</text>
-              <text x="298" y="111" text-anchor="start">Java · Bromo ★</text>
-              <text x="305" y="170">Austrálie</text>
-              <text x="345" y="195">Nový Zéland</text>
-            </g>
-          </svg>
+          <img src="mapa.png" alt="Mapa našich cest — Praha, jihovýchodní Asie, Austrálie, Nový Zéland" style="width: 100%; height: auto; display: block;">
         </div>
       </aside>
     </div>
@@ -817,6 +781,7 @@ section { padding: 110px 0; position: relative; }
         <div class="swatch"><div class="chip" style="background:#8A8A6E"></div><div class="name">Mech</div></div>
         <div class="swatch"><div class="chip" style="background:#9E5A3C"></div><div class="name">Cihla</div></div>
         <div class="swatch"><div class="chip" style="background:#E0D4BC"></div><div class="name">Kámen</div></div>
+        <div class="swatch"><div class="chip" style="background:#A9C6D9"></div><div class="name">Nebe</div></div>
       </div>
     </div>
   </div>
@@ -845,70 +810,33 @@ section { padding: 110px 0; position: relative; }
 </section>
 
 <!-- RSVP -->
-<section id="rsvp" data-section="rsvp" style="display:none">
+<section id="rsvp" data-section="rsvp">
   <div class="rsvp">
     <div class="wrap">
       <header class="section-head">
         <div class="num">06 — RSVP</div>
-        <h2>Potvrď, prosíme, do <span data-tw="rsvp_deadline">31. července 2026</span></h2>
+        <h2>Potvrď, prosíme, do <span data-tw="rsvp_deadline">25. července 2026</span></h2>
       </header>
-      <p class="lead">Hotel po nás chce počty a výběr jídel s předstihem, tak nám prosím dej vědět svoji volbu i případné alergie už teď. Díky!</p>
+      <p class="lead">Po obřadu se přesuneme na pozdní oběd do hotelu Olympia v Mariánských Lázních. Ať můžeme dát hotelu vědět počty a případné speciální požadavky, vyplň nám prosím pár řádků níže. Díky!</p>
 
-      <form class="rsvp-form" id="rsvp-form" novalidate>
+      <form class="rsvp-form" id="rsvp-form">
+        <div class="field full"><label>Jméno a příjmení</label><input type="text" name="name" required placeholder="Jan Novák"></div>
+
         <div class="field full">
-          <label>Účast</label>
+          <label>Kdy přijedeš?</label>
           <div class="attendance">
-            <label><input type="radio" name="attendance" value="yes" checked><span class="att-mark"></span>S radostí přijdeme</label>
-            <label><input type="radio" name="attendance" value="no"><span class="att-mark"></span>Bohužel nedorazíme</label>
-          </div>
-        </div>
-
-        <div class="field"><label>Jméno a příjmení</label><input type="text" name="name" required placeholder="Jan Novák"></div>
-        <div class="field"><label>E-mail</label><input type="email" name="email" required placeholder="jan@example.com"></div>
-        <div class="field">
-          <label>Počet osob</label>
-          <select name="count">
-            <option>1</option><option>2</option><option>3</option><option>4</option>
-          </select>
-        </div>
-        <div class="field"><label>Doprovod (jméno)</label><input type="text" name="plus" placeholder="volitelné"></div>
-
-        <div class="field full">
-          <label>Výběr jídla</label>
-          <div class="meal-options">
-            <label class="meal-card">
-              <input type="radio" name="meal" value="a" checked>
-              <div class="letter">A</div>
-              <div class="name">Pečená kachna<br>s knedlíkem a zelím</div>
-              <div class="note">klasika · obsahuje lepek</div>
-            </label>
-            <label class="meal-card">
-              <input type="radio" name="meal" value="b">
-              <div class="letter">B</div>
-              <div class="name">Pstruh na másle<br>s grilovanou zeleninou</div>
-              <div class="note">lehčí · ryba · laktóza</div>
-            </label>
-            <label class="meal-card">
-              <input type="radio" name="meal" value="c">
-              <div class="letter">C</div>
-              <div class="name">Pečená dýně<br>s burgholskou polentou</div>
-              <div class="note">vegetariánské · vegan na vyžádání</div>
-            </label>
+            <label><input type="radio" name="arrival" value="pátek"><span class="att-mark"></span>Přijedu v pátek</label>
+            <label><input type="radio" name="arrival" value="sobota" checked><span class="att-mark"></span>Přijedu v sobotu</label>
           </div>
         </div>
 
         <div class="field full">
-          <label>Alergeny &amp; speciální požadavky</label>
-          <textarea name="allergens" placeholder="Cokoli, co bychom měli vědět — alergie, intolerance, dieta…"></textarea>
-        </div>
-
-        <div class="field full">
-          <label>Vzkaz pro nás (volitelné)</label>
-          <textarea name="message" placeholder="Cokoli chceš dopsat — gratulace, vtip, prosba o pomoc s ubytováním…"></textarea>
+          <label>Jídlo — intolerance, alergie, preference</label>
+          <textarea name="food" placeholder="Cokoli, co bychom měli vědět — alergie, intolerance, dieta…"></textarea>
         </div>
 
         <div class="submit-row">
-          <div class="rsvp-deadline">Deadline: <span data-tw="rsvp_deadline">31. července 2026</span></div>
+          <div class="rsvp-deadline">Deadline: <span data-tw="rsvp_deadline">25. července 2026</span></div>
           <button type="submit" class="btn-submit">Odeslat odpověď</button>
         </div>
       </form>
@@ -924,7 +852,7 @@ section { padding: 110px 0; position: relative; }
 <section id="contact" data-section="contact">
   <div class="wrap">
     <header class="section-head">
-      <div class="num">06 — Kontakty</div>
+      <div class="num">07 — Kontakty</div>
       <h2>Když se něco zvrtne</h2>
     </header>
     <div class="contact-grid">
@@ -941,7 +869,7 @@ section { padding: 110px 0; position: relative; }
 <section id="gallery" data-section="gallery">
   <div class="wrap">
     <header class="section-head">
-      <div class="num">07 — Naše cesty</div>
+      <div class="num">08 — Naše cesty</div>
       <h2>Kousek z toho, kde jsme byli</h2>
     </header>
     <div class="gallery-intro">
@@ -1006,7 +934,7 @@ section { padding: 110px 0; position: relative; }
       <label>Místo</label><input class="tw-input" data-tw-input="place" value="Zřícenina kostela sv. Jana Křtitele">
     </div>
     <div class="tweaks-row" style="flex-direction: column; align-items: stretch; gap: 4px;">
-      <label>RSVP deadline</label><input class="tw-input" data-tw-input="rsvp_deadline" value="31. července 2026">
+      <label>RSVP deadline</label><input class="tw-input" data-tw-input="rsvp_deadline" value="25. července 2026">
     </div>
     <div class="tweaks-row" style="flex-direction: column; align-items: stretch; gap: 4px;">
       <label>Datum svatby (ISO, pro odpočet)</label><input class="tw-input" data-tw-input="wedding_iso" value="2026-08-08T12:00:00">
@@ -1036,7 +964,7 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
   "date_short": "08 / 08 / 2026",
   "date_long": "Sobota 8. srpna 2026",
   "place": "Zřícenina kostela sv. Jana Křtitele",
-  "rsvp_deadline": "31. července 2026",
+  "rsvp_deadline": "25. července 2026",
   "wedding_iso": "2026-08-08T12:00:00",
   "sections": {
     "story": true, "countdown": true, "program": true, "place": true,
@@ -1140,12 +1068,28 @@ document.querySelectorAll('[data-tw-section]').forEach(t => {
   });
 });
 
-/* ============ RSVP MOCK ============ */
-document.getElementById('rsvp-form').addEventListener('submit', (e) => {
+/* ============ RSVP → GOOGLE SHEETS ============ */
+/* Sem patří URL nasazené Apps Script web appky (Deploy → Web app → URL) */
+const RSVP_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzaU4PibotLWoZrijbki7DanwqZ8r4z1i53nII0oRnfspvnrzERtB1LzaTRvJrfFWWkTw/exec';
+
+document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
   e.preventDefault();
-  document.getElementById('rsvp-form').style.display = 'none';
-  document.getElementById('rsvp-thanks').classList.add('is-on');
-  window.scrollBy({ top: -40, behavior: 'smooth' });
+  const form = e.target;
+  const btn = form.querySelector('.btn-submit');
+  btn.disabled = true;
+  btn.textContent = 'Odesílám…';
+  try {
+    if (RSVP_SHEET_URL) {
+      await fetch(RSVP_SHEET_URL, { method: 'POST', mode: 'no-cors', body: new FormData(form) });
+    }
+    form.style.display = 'none';
+    document.getElementById('rsvp-thanks').classList.add('is-on');
+    window.scrollBy({ top: -40, behavior: 'smooth' });
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Odeslat odpověď';
+    alert('Odeslání se nepovedlo. Zkus to prosím znovu, nebo nám napiš.');
+  }
 });
 
 /* ============ SCROLL REVEAL ============ */
