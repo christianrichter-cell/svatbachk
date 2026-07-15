@@ -104,7 +104,7 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; letter-spacing: -0
 .hero {
   min-height: 100vh;
   position: relative;
-  padding: 120px 32px 80px;
+  padding: 120px 32px 190px;
   display: flex; flex-direction: column; justify-content: center;
   overflow: hidden;
 }
@@ -211,24 +211,38 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; letter-spacing: -0
 .scroll-cue::after {
   content: ""; display: block; width: 1px; height: 36px; background: var(--rule);
   animation: cue 2.4s infinite ease-in-out;
+  order: 1;
 }
+.scroll-cue .btn-rsvp {
+  order: 2;
+  margin-top: 8px;
+  padding: 17px 40px;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  text-decoration: none;
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 200ms;
+}
+.scroll-cue .btn-rsvp:hover { background: var(--ink); color: var(--bg); }
 @keyframes cue { 0%,100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; } 50% { opacity: 1; transform: scaleY(1); } }
 
 /* ============ SECTION ============ */
 section { padding: 110px 0; position: relative; }
 @media (max-width: 640px) { section { padding: 80px 0; } }
 .section-head {
-  display: grid; grid-template-columns: 200px 1fr; gap: 40px; align-items: baseline;
+  display: grid; grid-template-columns: 270px 1fr; gap: 28px; align-items: baseline;
   margin-bottom: 56px;
 }
 .section-head .num {
-  font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+  font-family: var(--mono); font-size: 16px; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--ink-soft);
 }
 .section-head .num::before { content: ""; display: inline-block; width: 28px; height: 1px; background: var(--rule); vertical-align: middle; margin-right: 12px; transform: translateY(-2px); }
 .section-head h2 {
   font-family: var(--serif); font-style: italic; font-weight: 300;
-  font-size: clamp(38px, 6vw, 72px);
+  font-size: clamp(32px, 4.5vw, 54px);
   line-height: 1.0; letter-spacing: -0.015em;
 }
 @media (max-width: 720px) {
@@ -629,7 +643,7 @@ section { padding: 110px 0; position: relative; }
     </div>
   </div>
   <div class="crater-mark">Zřícenina kostela sv. Jana Křtitele · v lese</div>
-  <div class="scroll-cue">Pokračuj dolů</div>
+  <div class="scroll-cue">Pokračuj dolů<a class="btn-rsvp" href="#rsvp">Potvrdit účast</a></div>
 </header>
 
 <main>
@@ -815,7 +829,7 @@ section { padding: 110px 0; position: relative; }
     <div class="wrap">
       <header class="section-head">
         <div class="num">06 — RSVP</div>
-        <h2>Potvrď, prosíme, do <span data-tw="rsvp_deadline">25. července 2026</span></h2>
+        <h2>Prosím, potvrď svou účast co nejdříve.</h2>
       </header>
       <p class="lead">Po obřadu se přesuneme na pozdní oběd do hotelu Olympia v Mariánských Lázních. Ať můžeme dát hotelu vědět počty a případné speciální požadavky, vyplň nám prosím pár řádků níže. Díky!</p>
 
