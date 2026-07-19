@@ -354,6 +354,7 @@ section { padding: 110px 0; position: relative; }
 .gift .detail dl { display: grid; grid-template-columns: auto 1fr; gap: 14px 24px; }
 .gift .detail dt { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); padding-top: 4px; }
 .gift .detail dd { font-family: var(--serif); font-style: italic; font-size: 19px; }
+.gift .detail dd .acc-note { display: block; font-family: var(--mono); font-style: normal; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-top: 8px; }
 @media (max-width: 800px) {
   .gift { grid-template-columns: 1fr; padding: 40px 28px; gap: 30px; }
   .gift .detail { border-left: none; border-top: 1px solid var(--rule); padding: 28px 0 0; }
@@ -759,9 +760,9 @@ section { padding: 110px 0; position: relative; }
         <div class="desc">Přesuneme se do Hotelu Olympia v Mariánských Lázních. Sedneme si ke společnému stolu, v klidu se najíme a připijeme si. Celé menu včetně dortu bude bez lepku, laktózy a kravského mléka — ve formuláři nám tak stačí dát vědět už jen případné alergie a další preference.</div>
       </div>
       <div class="tl-row">
-        <div class="time">17:30</div>
-        <div class="title">Konec oficiálního programu</div>
-        <div class="desc">Dojíme, dopijeme a přesuneme se někam dál. Hospůdku ještě vybíráme. :)</div>
+        <div class="time">17:00</div>
+        <div class="title">Zábava pokračuje</div>
+        <div class="desc">Kolem 17:00 se restaurace otevře i ostatním hotelovým hostům, ale jedna polovina zůstane rezervovaná jen pro nás — soukromí si tak užijeme dál. Zábava pokračuje na stejném místě až do nočních hodin.</div>
       </div>
     </div>
   </div>
@@ -799,7 +800,7 @@ section { padding: 110px 0; position: relative; }
         <div>
           <div class="label">Oběd &amp; oslava · 14:30</div>
           <h3>Hotel Olympia, Mariánské Lázně</h3>
-          <p>Po obřadu a focení vyrazíme do Spa &amp; Wellness Hotelu Olympia v Mariánských Lázních. Tam se v klidu najíme, připijeme si a kolem 17:30 se rozloučíme.</p>
+          <p>Po obřadu a focení vyrazíme do Spa &amp; Wellness Hotelu Olympia v Mariánských Lázních. Tam se v klidu najíme, připijeme si a zábava pokračuje na stejném místě až do nočních hodin. Kolem 17:00 se restaurace otevře i dalším hotelovým hostům, ale polovina zůstane rezervovaná jen pro nás.</p>
         </div>
         <a href="https://maps.app.goo.gl/TGqqULRHQeWXNh2q8" target="_blank" rel="noopener" class="link">Otevřít v mapách →</a>
       </div>
@@ -850,14 +851,14 @@ section { padding: 110px 0; position: relative; }
     </header>
     <div class="gift">
       <div class="quote">
-        „Svojí účastí nám uděláte největší radost. Kdybyste nás přesto chtěli obdarovat, potěší nás finanční příspěvek na naše cestovatelské plány.”
+        „Svojí účastí nám uděláte největší radost. Kdybyste nás přesto chtěli obdarovat, potěší nás finanční příspěvek na naše cestovatelské plány.“
         <span class="stamp">díky předem</span>
       </div>
       <div class="detail">
         <dl>
-          <dt>Účet</dt><dd>9807250001/5500</dd>
+          <dt>Účet</dt><dd>3675440032/3030<span class="acc-note">Náš společný účet</span></dd>
         </dl>
-        <img src="data:image/png;base64,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" alt="QR kód pro platbu" style="margin-top: 22px; width: 140px; height: 140px; display: block; image-rendering: pixelated;">
+        <img src="QR.jpeg" alt="QR kód pro platbu" style="margin-top: 22px; width: 140px; height: auto; display: block;">
       </div>
     </div>
   </div>
@@ -928,7 +929,7 @@ section { padding: 110px 0; position: relative; }
     </header>
     <div class="gallery-intro">
       <div></div>
-      <p>Předtím, než jsme se vrátili zpátky domů, projeli jsme Nový Zéland, Austrálii, Indonésii, Malajsii, Thajsko a Vietnam. Tady je pár momentů z našich vzpomínek.</p>
+      <p>Předtím, než jsme se vrátili zpátky domů, projeli jsme Nový Zéland, Austrálii, Indonésii, Malajsii, Singapur, Thajsko a Vietnam. Tady je pár momentů z našich vzpomínek.</p>
     </div>
     <div class="gallery-grid">
       <figure class="g1"><img src="fotky/nz-hory.jpg" alt="Selfie v horách na Novém Zélandu" loading="lazy" style="object-position: center 60%"><figcaption>Nový Zéland</figcaption></figure>
